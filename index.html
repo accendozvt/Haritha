@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haritha V R — AI Projects Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #1a1a1a;
+      --mid: #3a3a3a;
+      --muted: #6b6b6b;
+      --border: #e2e2e2;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --accent: #2d2d2d;
+      --radius-btn: 50px;
+      --radius-card: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .btn-nav {
+      padding: 9px 22px;
+      border-radius: var(--radius-btn);
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-nav:hover { background: var(--mid); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5% 80px;
+      gap: 60px;
+    }
+
+    .hero-text { max-width: 560px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge i { width: 14px; height: 14px; }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: var(--muted); }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 460px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--mid); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      background: transparent;
+      color: var(--black);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover { border-color: var(--mid); background: var(--light); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
+
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--black);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* HERO IMAGE */
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-img-bg {
+      width: 420px;
+      height: 520px;
+      border-radius: 24px;
+      background: var(--light);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .hero-img-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .hero-card-float {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .card-icon-wrap {
+      width: 40px; height: 40px;
+      background: var(--black);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .card-icon-wrap i { width: 18px; height: 18px; }
+
+    .card-float-text { line-height: 1.3; }
+    .card-float-text strong { font-size: 0.85rem; font-weight: 700; color: var(--black); display: block; }
+    .card-float-text span { font-size: 0.75rem; color: var(--muted); }
+
+    .hero-card-float2 {
+      position: absolute;
+      top: 24px;
+      right: -24px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: var(--radius-card);
+      padding: 14px 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    .card-float2-text strong { font-size: 1.1rem; font-weight: 800; display: block; }
+    .card-float2-text span { font-size: 0.72rem; color: rgba(255,255,255,0.65); }
+
+    /* SECTION COMMONS */
+    section { padding: 100px 5%; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section-tag i { width: 13px; height: 13px; }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    .section-header { margin-bottom: 56px; }
+
+    /* ABOUT */
+    .about { background: var(--light); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-points {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .about-point {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .point-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--dark);
+    }
+
+    .point-icon i { width: 18px; height: 18px; }
+
+    .point-text strong { display: block; font-size: 0.95rem; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+    .point-text p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    .about-right {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      padding: 40px;
+    }
+
+    .about-quote {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .region-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .region-tag {
+      padding: 6px 14px;
+      border-radius: var(--radius-btn);
+      background: var(--light);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--mid);
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      transition: box-shadow 0.25s, transform 0.2s;
+      cursor: default;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+
+    .service-card.dark {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+
+    .service-card.dark .service-icon {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+    }
+
+    .service-icon i { width: 22px; height: 22px; }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .service-card.dark h3 { color: var(--white); }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .service-card.dark p { color: rgba(255,255,255,0.6); }
+
+    /* EXPERIENCE */
+    .experience { background: var(--light); }
+
+    .exp-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 21px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 24px;
+      padding-bottom: 40px;
+      position: relative;
+    }
+
+    .exp-item:last-child { padding-bottom: 0; }
+
+    .exp-dot {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      color: var(--dark);
+    }
+
+    .exp-dot.active {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--white);
+    }
+
+    .exp-dot i { width: 18px; height: 18px; }
+
+    .exp-content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 24px 28px;
+    }
+
+    .exp-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .exp-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .exp-period {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--light);
+      padding: 4px 12px;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--border);
+    }
+
+    .exp-company {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .exp-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* SKILLS */
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .skills-group { display: flex; flex-direction: column; gap: 20px; }
+
+    .skill-row { display: flex; flex-direction: column; gap: 8px; }
+
+    .skill-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: var(--black);
+      border-radius: 10px;
+      transition: width 1s ease;
+    }
+
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-btn);
+      background: var(--light);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--mid);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .skill-tag:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+    .skill-tag i { width: 13px; height: 13px; }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--black);
+      border-radius: 24px;
+      margin: 0 5% 80px;
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .cta-section h2 { color: var(--white); margin-bottom: 12px; }
+
+    .cta-section p { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 480px; }
+
+    .cta-buttons { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-white:hover { background: var(--light); transform: translateY(-2px); }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      background: transparent;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 5%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo { font-weight: 700; font-size: 1rem; color: var(--black); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--black); }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mid);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+    .social-btn i { width: 16px; height: 16px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; text-align: center; }
+      .hero-text { max-width: 100%; }
+      .hero-sub { max-width: 100%; }
+      .hero-cta { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-image-wrap { order: -1; }
+      .hero-img-bg { width: 280px; height: 340px; }
+      .hero-card-float { left: -10px; }
+      .hero-card-float2 { right: -10px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .skills-wrap { grid-template-columns: 1fr; }
+      .cta-section { grid-template-columns: 1fr; text-align: center; }
+      .cta-buttons { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      nav .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 48px 28px; margin: 0 4% 60px; }
+      section { padding: 70px 4%; }
+      .hero { padding: 100px 4% 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Haritha V R</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+    <a href="#contact" class="btn-nav">Let's Connect</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i data-lucide="map-pin"></i>
+        Dubai, United Arab Emirates
+      </div>
+      <h1>AI-Powered <span>Project</span> Leadership</h1>
+      <p class="hero-sub">
+        Projects Manager at Bettroi with 20+ years of global IT experience — turning complex AI technology into business-ready solutions across Video Surveillance, Voice Agents, and Process Automation.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">
+          <i data-lucide="send"></i>
+          Let's Collaborate
+        </a>
+        <a href="#experience" class="btn-secondary">
+          <i data-lucide="briefcase"></i>
+          View Experience
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">20+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Countries Served</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">7+</span>
+          <span class="stat-label">AI Solutions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+      <div class="hero-img-bg">
+        <img src="assets/Haritha-VR.png" alt="Haritha V R" />
+      </div>
+      <div class="hero-card-float">
+        <div class="card-icon-wrap">
+          <i data-lucide="cpu"></i>
+        </div>
+        <div class="card-float-text">
+          <strong>AI Projects Manager</strong>
+          <span>Bettroi — Better Business</span>
+        </div>
+      </div>
+      <div class="hero-card-float2">
+        <div class="card-float2-text">
+          <strong>Aug 2024</strong>
+          <span>Current Position</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div>
+        <div class="section-tag"><i data-lucide="user"></i> About Me</div>
+        <h2>Bridging Technology & Business Impact</h2>
+        <p class="section-desc">
+          I lead a diverse portfolio of next-generation AI solutions, combining deep IT expertise with a sharp understanding of client pain points to deliver measurable results.
+        </p>
+        <div class="about-points">
+          <div class="about-point">
+            <div class="point-icon"><i data-lucide="globe"></i></div>
+            <div class="point-text">
+              <strong>Global Delivery Experience</strong>
+              <p>Successfully delivered projects across India, UAE, US, UK, and Africa, navigating diverse markets and client expectations.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="point-icon"><i data-lucide="users"></i></div>
+            <div class="point-text">
+              <strong>People-First Leadership</strong>
+              <p>Managing cross-functional teams with a focus on direct communication, long-term client trust, and collaborative delivery.</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="point-icon"><i data-lucide="trending-up"></i></div>
+            <div class="point-text">
+              <strong>Strategic Transformation</strong>
+              <p>Specializing in business orchestration, gap analysis, and turning complex tech into scalable, production-ready solutions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <p class="about-quote">
+          "Always open to strategic collaborations, digital transformation projects, and partnerships in AI product innovation. Let's talk if you're looking to scale with AI to reduce human effort and optimise human resources."
+        </p>
+        <p style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:14px;">Regions Served</p>
+        <div class="region-list">
+          <span class="region-tag">India</span>
+          <span class="region-tag">UAE</span>
+          <span class="region-tag">United States</span>
+          <span class="region-tag">United Kingdom</span>
+          <span class="region-tag">Africa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / EXPERTISE -->
+  <section id="services">
+    <div class="section-header">
+      <div class="section-tag"><i data-lucide="layers"></i> Expertise</div>
+      <h2>AI Solutions I Build & Lead</h2>
+      <p class="section-desc">From concept to deployment — driving next-gen AI products across high-impact business domains.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card dark">
+        <div class="service-icon"><i data-lucide="camera"></i></div>
+        <h3>AI Video Surveillance Analytics</h3>
+        <p>Intelligent surveillance systems powered by computer vision — real-time threat detection, behavioral analytics, and automated alerting for enterprise security.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="phone-call"></i></div>
+        <h3>AI Voice Agents</h3>
+        <p>Conversational AI agents for Insurance and Real Estate — automating client interactions, lead qualification, and appointment scheduling at scale.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="bar-chart-2"></i></div>
+        <h3>AI Agents for Sales</h3>
+        <p>Intelligent sales assistant agents that support consultants with real-time insights, pipeline management, and personalized client recommendations.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="calculator"></i></div>
+        <h3>AI-Powered Tax Assistants</h3>
+        <p>Smart tax advisory tools leveraging NLP and domain knowledge to simplify compliance, reporting, and advisory workflows for end users.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="file-spreadsheet"></i></div>
+        <h3>Data Parsing Tools</h3>
+        <p>Automated extraction of structured Excel data from PDFs and images — ERP/SAP-ready pipelines that eliminate manual data entry and reduce errors.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i data-lucide="layout-dashboard"></i></div>
+        <h3>CustomerX — CX Decision Support</h3>
+        <p>AI-driven boardroom CX analytics platform providing leadership teams with actionable insights and decision intelligence to elevate customer experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience" id="experience">
+    <div class="section-header">
+      <div class="section-tag"><i data-lucide="briefcase"></i> Experience</div>
+      <h2>Two Decades of Delivering Results</h2>
+      <p class="section-desc">A consistent track record of leadership across IT, AI, operations, and client management.</p>
+    </div>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-dot active"><i data-lucide="cpu"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">Projects Manager — AI Analytics & Video Surveillance</span>
+            <span class="exp-period">Aug 2024 – Present</span>
+          </div>
+          <div class="exp-company">Bettroi – Better Business · Dubai, UAE (Hybrid)</div>
+          <p class="exp-desc">Leading a diverse portfolio of next-gen AI solutions including video surveillance analytics, voice agents, data parsing tools, and AI-powered customer experience platforms. Managing teams, client relationships, and end-to-end product delivery.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><i data-lucide="briefcase"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">Project Manager</span>
+            <span class="exp-period">Jul 2020 – Jul 2025</span>
+          </div>
+          <div class="exp-company">INVENTOR SOLUTIONS LLC · Ajman Emirate, UAE</div>
+          <p class="exp-desc">Managed IT projects with a focus on sales management and agile (Scrum) delivery. Oversaw cross-functional teams and client engagements across the UAE region.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><i data-lucide="settings"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">Chief Operations Officer</span>
+            <span class="exp-period">Mar 2016 – Jun 2020</span>
+          </div>
+          <div class="exp-company">Srishiti Innovative FZC · United Arab Emirates</div>
+          <p class="exp-desc">Studied project objectives by gathering business and functional requirements, evaluating output formats, and overseeing operational delivery. Managed strategic partnerships and client portfolios.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><i data-lucide="headphones"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">Head – Client Support & Relationship Management</span>
+            <span class="exp-period">Aug 2015 – Jun 2020</span>
+          </div>
+          <div class="exp-company">Srishiti Innovative FZC · IC Leela Info Park, Trivandrum</div>
+          <p class="exp-desc">Led requirement analysis, client interaction strategy, and proposal follow-up. Built long-term client relationships and improved support delivery through process optimization.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><i data-lucide="monitor"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">HOD – Computer Science</span>
+            <span class="exp-period">Jul 2005 – Dec 2012</span>
+          </div>
+          <div class="exp-company">Army Welfare Education Society · Thiruvananthapuram, India</div>
+          <p class="exp-desc">Led the Computer Science department — designed curricula, created engaging lessons, and built an interactive learning environment that improved student outcomes.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot"><i data-lucide="code"></i></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <span class="exp-title">Software Development & Support (Offshore)</span>
+            <span class="exp-period">Jan 2000 – Mar 2005</span>
+          </div>
+          <div class="exp-company">FAH Gen Trading LLC · Dubai, UAE</div>
+          <p class="exp-desc">Maintained and enhanced Inventory Management Software — analyzed change requests, implemented updates, and provided offshore technical support for core business systems.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-tag"><i data-lucide="zap"></i> Skills</div>
+      <h2>Core Competencies</h2>
+      <p class="section-desc">A well-rounded skill set built across two decades of hands-on project leadership and technology delivery.</p>
+    </div>
+    <div class="skills-wrap">
+      <div class="skills-group">
+        <div class="skill-row">
+          <div class="skill-label-row"><span>Project Management</span><span>95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span>AI Solutions Leadership</span><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span>Sales Management</span><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span>Client Relationship Management</span><span>92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span>Agile / Scrum</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label-row"><span>Business Process Automation</span><span>87%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:87%"></div></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:20px;">Domain Tags</p>
+        <div class="tags-wrap">
+          <span class="skill-tag"><i data-lucide="camera"></i>Video Surveillance AI</span>
+          <span class="skill-tag"><i data-lucide="phone-call"></i>Voice Agents</span>
+          <span class="skill-tag"><i data-lucide="file-text"></i>Data Parsing</span>
+          <span class="skill-tag"><i data-lucide="bar-chart-2"></i>CX Analytics</span>
+          <span class="skill-tag"><i data-lucide="database"></i>ERP / SAP</span>
+          <span class="skill-tag"><i data-lucide="users"></i>Team Leadership</span>
+          <span class="skill-tag"><i data-lucide="git-branch"></i>Gap Analysis</span>
+          <span class="skill-tag"><i data-lucide="target"></i>Decision-Making</span>
+          <span class="skill-tag"><i data-lucide="layers"></i>Scrum</span>
+          <span class="skill-tag"><i data-lucide="globe"></i>Global Delivery</span>
+          <span class="skill-tag"><i data-lucide="trending-up"></i>Digital Transformation</span>
+          <span class="skill-tag"><i data-lucide="shield"></i>Risk Management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section" id="contact">
+    <div>
+      <h2>Ready to Scale with AI?</h2>
+      <p>Whether you need an AI product built, a transformation strategy, or a collaboration partner — let's have a real conversation about what's possible.</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="https://www.linkedin.com/in/haritha-v-r" target="_blank" class="btn-white">
+        <i data-lucide="linkedin"></i>
+        Connect on LinkedIn
+      </a>
+      <a href="mailto:haritha@example.com" class="btn-outline-white">
+        <i data-lucide="mail"></i>
+        Send a Message
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Haritha V R</span>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/haritha-v-r" target="_blank" class="social-btn" title="LinkedIn">
+        <i data-lucide="linkedin"></i>
+      </a>
+      <a href="mailto:haritha@example.com" class="social-btn" title="Email">
+        <i data-lucide="mail"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Animate skill bars on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            requestAnimationFrame(() => { bar.style.width = width; });
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skills-group').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
